@@ -27,10 +27,10 @@
     <version>52</version>
   </parent>
 
-  <groupId>org.sonarsource.pmd</groupId>
-  <artifactId>sonar-pmd</artifactId>
-  <version>3.3.0-SNAPSHOT</version>
-  <name>SonarQube PMD Project</name>
+  <groupId>com.telenav.p3c.pmd</groupId>
+  <artifactId>sonar-p3c-pmd</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
+  <name>SonarQube P3C PMD Project</name>
   <packaging>pom</packaging>
 
   <scm>
@@ -63,10 +63,16 @@
       <email>jens@gerdes.digital</email>
       <timezone>+1</timezone>
     </developer>
+    <developer>
+      <name>Eric Wei</name>
+      <email>jwei@telenavsoftware.com</email>
+      <timezone>+8</timezone>
+    </developer>
   </developers>
 
   <properties>
     <pmd.version>6.13.0</pmd.version>
+    <p3c-pmd.version>2.0.0</p3c-pmd.version>
     <junit.jupiter.version>5.4.2</junit.jupiter.version>
     <mockito.version>2.27.0</mockito.version>
     <assertj.version>3.12.2</assertj.version>
@@ -132,6 +138,13 @@
             <artifactId>antlr4-runtime</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+
+      <!-- Alibaba P3C PMD -->
+      <dependency>
+        <groupId>com.alibaba.p3c</groupId>
+        <artifactId>p3c-pmd</artifactId>
+        <version>${p3c-pmd.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
