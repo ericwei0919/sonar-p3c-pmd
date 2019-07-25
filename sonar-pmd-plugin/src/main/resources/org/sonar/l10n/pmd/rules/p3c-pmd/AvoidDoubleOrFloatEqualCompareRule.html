@@ -1,0 +1,16 @@
+<p>Look for qualified this usages in the same class.</p>
+<p>Examples:</p>
+<pre>
+    Negative example:
+        float g = 0.7f-0.6f;
+        float h = 0.8f-0.7f;
+        if (g == h) {
+            System.out.println("true");
+        }
+
+    Positive example:
+        double dis = 1e-6;
+        double d1 = 0.0000001d;
+        double d2 = 0d;
+        System.out.println(Math.abs(d1 - d2) < dis);
+</pre>

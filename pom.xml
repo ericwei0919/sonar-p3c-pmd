@@ -27,7 +27,7 @@
     <version>52</version>
   </parent>
 
-  <groupId>com.telenav.p3c.pmd</groupId>
+  <groupId>com.ericwei0919.p3c.pmd</groupId>
   <artifactId>sonar-p3c-pmd</artifactId>
   <version>2.0.0-SNAPSHOT</version>
   <name>SonarQube P3C PMD Project</name>
@@ -65,7 +65,7 @@
     </developer>
     <developer>
       <name>Eric Wei</name>
-      <email>jwei@telenavsoftware.com</email>
+      <email>ericwei0919@gmail.com</email>
       <timezone>+8</timezone>
     </developer>
   </developers>
