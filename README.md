@@ -1,9 +1,9 @@
-# SonarQube P3C PMD Plugin [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.sonarsource.pmd/sonar-pmd-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.sonarsource.pmd/sonar-pmd-plugin) [![Build Status](https://api.travis-ci.org/jensgerdes/sonar-pmd.svg?branch=master)](https://travis-ci.org/jensgerdes/sonar-pmd) [![SonarStatus](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.pmd%3Asonar-pmd-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.pmd%3Asonar-pmd-plugin) [![SonarStatus](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.pmd%3Asonar-pmd-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=org.sonarsource.pmd%3Asonar-pmd-plugin)
-Sonar-P3C-PMD is a plugin that provides coding rules from [PMD](https://pmd.github.io/) and [P3C](https://github.com/alibaba/p3c).
+# SonarQube P3C PMD Plugin
 
-For a list of all PMD rules (version 3.2.1) and their status, see: [RULES.md](https://github.com/jensgerdes/sonar-pmd/blob/master/docs/RULES.md)
+Sonar-P3C-PMD is a plugin that provides coding rules from [P3C](https://github.com/alibaba/p3c).
+Please note: This sonar plugin uses PMD version 6.13.0, and PMD/PMD Unit Tests rules are **not** included. **It means this plugin can work with or without PMD plugin separately.**
 
-This repo add all P3C-PMD rules (version 2.0.0):
+This repo add all P3C-PMD rules (version 2.0.0 has 56 rules):
 ```properties
 ##p3c##
 #AlibabaJavaComments
@@ -88,13 +88,13 @@ rule.p3c-pmd.UseQuietReferenceNotationRule.name=Variables must add exclamatory m
 ## Installation
 
 1. Clone the repo, and run `mvn package` to build plugin package.
-2. Put the output jar file, such as sonar-p3c-pmd-plugin-2.0.0-SNAPSHOT.jar into ${sonarqube}/extensions/plugins
+2. Put the output jar file, such as sonar-p3c-pmd-plugin-2.0.0.jar into ${sonarqube}/extensions/plugins
 3. Restart sonarqube server.
 
 ## Usage
 
 Usage should be straight forward:
-1. Activate some PMD rules in your quality profile.
+1. Activate some P3C PMD rules in your quality profile.
 2. Run an analysis.
 
 ## License

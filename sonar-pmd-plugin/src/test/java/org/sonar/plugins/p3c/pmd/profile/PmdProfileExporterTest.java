@@ -40,7 +40,7 @@ import org.sonar.api.server.rule.RulesDefinition.Param;
 import org.sonar.api.utils.ValidationMessages;
 import org.sonar.plugins.p3c.pmd.PmdConstants;
 import org.sonar.plugins.p3c.pmd.PmdTestUtils;
-import org.sonar.plugins.p3c.pmd.rule.PmdRulesDefinition;
+import org.sonar.plugins.p3c.pmd.rule.P3cPmdRulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -57,7 +57,7 @@ class PmdProfileExporterTest {
     private final PmdProfileExporter exporter = new PmdProfileExporter();
 
     private static RulesProfile importProfile(String configuration) {
-        PmdRulesDefinition definition = new PmdRulesDefinition();
+        P3cPmdRulesDefinition definition = new P3cPmdRulesDefinition();
         RulesDefinition.Context context = new RulesDefinition.Context();
         definition.define(context);
         RulesDefinition.Repository repository = context.repository(PmdConstants.REPOSITORY_KEY);
@@ -138,43 +138,14 @@ class PmdProfileExporterTest {
                 .hasMessage("An exception occurred while generating the PMD configuration file from profile: null");
     }
 
-   /* @Test
-    void should_export_pmd_profile() {
-        String importedXml = PmdTestUtils.getResourceContent("/org/sonar/plugins/p3c/pmd/export_simple.xml");
-
-        String exportedXml = exporter.exportProfile(PmdConstants.REPOSITORY_KEY, importProfile(importedXml));
-
-        assertThat(exportedXml).satisfies(equalsIgnoreEOL(importedXml));
-    }*/
-
-   /* @Test
-    void should_skip_empty_params() {
-        String importedXml = PmdTestUtils.getResourceContent("/org/sonar/plugins/p3c/pmd/export_rule_with_empty_param.xml");
-
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<ruleset name=\"pmd\">\n" +
-                "  <description>Sonar Profile: pmd</description>\n" +
-                "  <rule ref=\"category/java/codestyle.xml/CommentDefaultAccessModifier\">\n" +
-                "    <priority>2</priority>\n" +
-                "    <properties>\n" +
-                "      <property name=\"violationSuppressRegex\" value=\"nonEmptyValue\" />\n" +
-                "      <property name=\"violationSuppressXPath\" value=\"nonEmptyValue\" />\n" +
-                "    </properties>\n" +
-                "  </rule>\n" +
-                "</ruleset>";
-
-        String actual = exporter.exportProfile(PmdConstants.REPOSITORY_KEY, importProfile(importedXml));
-        assertThat(actual).satisfies(equalsIgnoreEOL(expected));
-    }*/
-
     @Test
     void should_skip_all_empty_params() {
         String importedXml = PmdTestUtils.getResourceContent("/org/sonar/plugins/p3c/pmd/export_rule_with_all_params_empty.xml");
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<ruleset name=\"pmd\">\n" +
-                "  <description>Sonar Profile: pmd</description>\n" +
-                "  <rule ref=\"category/java/codestyle.xml/CommentDefaultAccessModifier\">\n" +
+                "<ruleset name=\"p3c-pmd\">\n" +
+                "  <description>Sonar Profile: p3c-pmd</description>\n" +
+                "  <rule ref=\"rulesets/java/ali-concurrent.xml/ThreadPoolCreationRule\">\n" +
                 "    <priority>2</priority>\n" +
                 "  </rule>\n" +
                 "</ruleset>";
@@ -192,7 +163,7 @@ class PmdProfileExporterTest {
         exporter.exportProfile(RulesProfile.create(), writer);
 
         assertThat(writer.toString()).satisfies(equalsIgnoreEOL("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<ruleset name=\"pmd\">  <description>Sonar Profile: pmd</description></ruleset>"));
+                "<ruleset name=\"p3c-pmd\">  <description>Sonar Profile: p3c-pmd</description></ruleset>"));
     }
 
     @Test
@@ -214,52 +185,4 @@ class PmdProfileExporterTest {
 
         assertThat(writer.toString()).satisfies(equalsIgnoreEOL(PmdTestUtils.getResourceContent("/org/sonar/plugins/p3c/pmd/export_xpath_rules.xml")));
     }
-/*
-    @Test
-    void should_fail_if_message_not_provided_for_xPath_rule() {
-
-        // given
-        final PmdRule rule = new PmdRule(PmdConstants.XPATH_CLASS);
-
-        rule.addProperty(new PmdProperty(PmdConstants.XPATH_EXPRESSION_PARAM, "xpathExpression"));
-        rule.setName("MyOwnRule");
-
-        // when
-        final Throwable thrown = catchThrowable(() -> PmdProfileExporter.processXPathRule("xpathKey", rule));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-    }*//*
-
-    @Test
-    void should_process_xPath_rule() {
-        PmdRule rule = new PmdRule(PmdConstants.XPATH_CLASS);
-        rule.setName("MyOwnRule");
-        rule.addProperty(new PmdProperty(PmdConstants.XPATH_EXPRESSION_PARAM, "xpathExpression"));
-        rule.addProperty(new PmdProperty(PmdConstants.XPATH_MESSAGE_PARAM, "message"));
-
-        PmdProfileExporter.processXPathRule("xpathKey", rule);
-
-        assertThat(rule.getMessage()).isEqualTo("message");
-        assertThat(rule.getRef()).isNull();
-        assertThat(rule.getClazz()).isEqualTo(PmdConstants.XPATH_CLASS);
-        assertThat(rule.getProperty(PmdConstants.XPATH_MESSAGE_PARAM)).isNull();
-        assertThat(rule.getName()).isEqualTo("xpathKey");
-        assertThat(rule.getProperty(PmdConstants.XPATH_EXPRESSION_PARAM).getValue()).isEqualTo("xpathExpression");
-    }
-*//*
-    @Test
-    void should_fail_if_xPath_not_provided() {
-
-        // given
-        final PmdRule rule = new PmdRule(PmdConstants.XPATH_CLASS);
-        rule.setName("MyOwnRule");
-        rule.addProperty(new PmdProperty(PmdConstants.XPATH_MESSAGE_PARAM, "This is bad"));
-
-        // when
-        final Throwable thrown = catchThrowable(() -> PmdProfileExporter.processXPathRule("xpathKey", rule));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-    }*/
 }

@@ -36,8 +36,8 @@ import org.sonar.api.utils.log.Loggers;
 
 @ScannerSide
 public class PmdConfiguration {
-    static final String PROPERTY_GENERATE_XML = "sonar.pmd.generateXml";
-    private static final String PMD_RESULT_XML = "pmd-result.xml";
+    static final String PROPERTY_GENERATE_XML = "sonar.p3c.pmd.generateXml";
+    private static final String PMD_RESULT_XML = "p3c-pmd-result.xml";
     private static final Logger LOG = Loggers.get(PmdConfiguration.class);
     private final FileSystem fileSystem;
     private final Configuration settings;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset>
-  <rule ref="category/java/codestyle.xml/CommentDefaultAccessModifier">
+  <rule ref="rulesets/java/ali-comment.xml/CommentsMustBeJavadocFormatRule">
     <priority>2</priority>
     <properties>
       <property name="regex" value=""/>

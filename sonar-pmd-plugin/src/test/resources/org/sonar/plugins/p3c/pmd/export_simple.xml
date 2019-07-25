@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="pmd">
-  <description>Sonar Profile: pmd</description>
-  <rule ref="category/java/design.xml/CouplingBetweenObjects">
+<ruleset name="p3c-pmd">
+  <description>Sonar Profile: p3c-pmd</description>
+  <rule ref="rulesets/java/ali-comment.xml/CommentsMustBeJavadocFormatRule">
     <priority>2</priority>
-    <properties>
-      <property name="threshold" value="20" />
-    </properties>
   </rule>
-  <rule ref="category/java/design.xml/ExcessiveImports">
+  <rule ref="rulesets/java/ali-comment.xml/AbstractMethodOrInterfaceMethodMustUseJavadocRule">
     <priority>3</priority>
   </rule>
-  <rule ref="category/java/multithreading.xml/UseNotifyAllInsteadOfNotify">
+  <rule ref="rulesets/java/ali-comment.xml/ClassMustHaveAuthorRule">
     <priority>4</priority>
   </rule>
 </ruleset>

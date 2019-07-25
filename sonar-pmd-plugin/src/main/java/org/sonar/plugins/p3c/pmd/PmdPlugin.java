@@ -23,8 +23,7 @@ import org.sonar.api.Plugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.plugins.p3c.pmd.profile.PmdProfileExporter;
 import org.sonar.plugins.p3c.pmd.profile.PmdProfileImporter;
-import org.sonar.plugins.p3c.pmd.rule.PmdRulesDefinition;
-import org.sonar.plugins.p3c.pmd.rule.PmdUnitTestsRulesDefinition;
+import org.sonar.plugins.p3c.pmd.rule.P3cPmdRulesDefinition;
 
 /**
  * The {@link PmdPlugin} is the main entry-point of Sonar-PMD.
@@ -43,8 +42,7 @@ public class PmdPlugin implements Plugin {
                 PmdSensor.class,
                 PmdConfiguration.class,
                 PmdExecutor.class,
-                PmdRulesDefinition.class,
-                PmdUnitTestsRulesDefinition.class,
+                P3cPmdRulesDefinition.class,
                 PmdProfileExporter.class,
                 PmdProfileImporter.class,
                 PmdViolationRecorder.class

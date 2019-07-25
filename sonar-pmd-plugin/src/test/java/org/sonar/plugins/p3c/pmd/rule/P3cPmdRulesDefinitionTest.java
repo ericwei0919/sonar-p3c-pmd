@@ -28,15 +28,16 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class P3cPmdRulesDefinitionTest {
+class P3cPmdRulesDefinitionTest {
+
     @Test
     void should_init_p3c_pmd_rules_definition_successfully() {
         P3cPmdRulesDefinition definition = new P3cPmdRulesDefinition();
         RulesDefinition.Context context = new RulesDefinition.Context();
         definition.define(context);
-        RulesDefinition.Repository repository = context.repository(PmdConstants.P3C_REPOSITORY_KEY);
+        RulesDefinition.Repository repository = context.repository(PmdConstants.REPOSITORY_KEY);
 
-        assertThat(repository.name()).isEqualTo(PmdConstants.P3C_REPOSITORY_NAME);
+        assertThat(repository.name()).isEqualTo(PmdConstants.REPOSITORY_NAME);
         assertThat(repository.language()).isEqualTo(PmdConstants.LANGUAGE_KEY);
 
         List<RulesDefinition.Rule> rules = repository.rules();
@@ -63,7 +64,7 @@ public class P3cPmdRulesDefinitionTest {
         P3cPmdRulesDefinition definition = new P3cPmdRulesDefinition();
         RulesDefinition.Context context = new RulesDefinition.Context();
         definition.define(context);
-        RulesDefinition.Repository repository = context.repository(PmdConstants.P3C_REPOSITORY_KEY);
+        RulesDefinition.Repository repository = context.repository(PmdConstants.REPOSITORY_KEY);
 
         for (RulesDefinition.Rule rule : repository.rules()) {
             assertThat(rule.key()).doesNotContain("JUnitStaticSuite");
@@ -75,10 +76,9 @@ public class P3cPmdRulesDefinitionTest {
         P3cPmdRulesDefinition definition = new P3cPmdRulesDefinition();
         RulesDefinition.Context context = new RulesDefinition.Context();
         definition.define(context);
-        RulesDefinition.Repository repository = context.repository(PmdConstants.P3C_REPOSITORY_KEY);
+        RulesDefinition.Repository repository = context.repository(PmdConstants.REPOSITORY_KEY);
 
         RulesDefinition.Rule commentsMustBeJavadocFormatRule = Iterables.find(repository.rules(), rule -> rule.key().equals("CommentsMustBeJavadocFormatRule"));
-
         assertThat(commentsMustBeJavadocFormatRule.internalKey()).isEqualTo("rulesets/java/ali-comment.xml/CommentsMustBeJavadocFormatRule");
     }
 }

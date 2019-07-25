@@ -29,12 +29,8 @@ class PmdConstantsTest {
     void checkDefinedKeys() {
         assertThat(PmdConstants.PLUGIN_KEY).isEqualTo("p3c-pmd");
         assertThat(PmdConstants.PLUGIN_NAME).isEqualTo("P3C PMD");
-        assertThat(PmdConstants.REPOSITORY_KEY).isEqualTo("pmd");
-        assertThat(PmdConstants.REPOSITORY_NAME).isEqualTo("PMD");
-        assertThat(PmdConstants.TEST_REPOSITORY_KEY).isEqualTo("pmd-unit-tests");
-        assertThat(PmdConstants.TEST_REPOSITORY_NAME).isEqualTo("PMD Unit Tests");
-        assertThat(PmdConstants.P3C_REPOSITORY_KEY).isEqualTo("p3c-pmd");
-        assertThat(PmdConstants.P3C_REPOSITORY_NAME).isEqualTo("P3C PMD");
+        assertThat(PmdConstants.REPOSITORY_KEY).isEqualTo("p3c-pmd");
+        assertThat(PmdConstants.REPOSITORY_NAME).isEqualTo("P3C PMD");
         assertThat(PmdConstants.XPATH_CLASS).isEqualTo("net.sourceforge.pmd.lang.rule.XPathRule");
         assertThat(PmdConstants.XPATH_EXPRESSION_PARAM).isEqualTo("xpath");
         assertThat(PmdConstants.XPATH_MESSAGE_PARAM).isEqualTo("message");

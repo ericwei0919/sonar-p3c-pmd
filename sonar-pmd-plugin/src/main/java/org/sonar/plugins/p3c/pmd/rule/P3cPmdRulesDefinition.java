@@ -19,23 +19,78 @@
  */
 package org.sonar.plugins.p3c.pmd.rule;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
+
 import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.p3c.pmd.PmdConstants;
+import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
 public final class P3cPmdRulesDefinition implements RulesDefinition {
+
+    private static final Logger LOGGER = Loggers.get(P3cPmdRulesDefinition.class);
 
     public P3cPmdRulesDefinition() {
         // do nothing
     }
 
+    static void extractRulesData(NewRepository repository, String xmlRulesFilePath, String htmlDescriptionFolder) {
+        try (InputStream inputStream = P3cPmdRulesDefinition.class.getResourceAsStream(xmlRulesFilePath)) {
+            new RulesDefinitionXmlLoader()
+                    .load(
+                            repository,
+                            inputStream,
+                            StandardCharsets.UTF_8
+                    );
+        } catch (IOException e) {
+            LOGGER.error("Failed to load PMD RuleSet.", e);
+        }
+
+        ExternalDescriptionLoader.loadHtmlDescriptions(repository, htmlDescriptionFolder);
+        loadNames(repository);
+        SqaleXmlLoader.load(repository, "/com/sonar/sqale/p3c/pmd-model.xml");
+    }
+
     @Override
     public void define(Context context) {
         NewRepository repository = context
-                .createRepository(PmdConstants.P3C_REPOSITORY_KEY, PmdConstants.LANGUAGE_KEY)
-                .setName(PmdConstants.P3C_REPOSITORY_NAME);
+                .createRepository(PmdConstants.REPOSITORY_KEY, PmdConstants.LANGUAGE_KEY)
+                .setName(PmdConstants.REPOSITORY_NAME);
 
-        PmdRulesDefinition.extractRulesData(repository, "/org/sonar/plugins/p3c/pmd/rules-p3c.xml", "/org/sonar/l10n/pmd/rules/p3c-pmd");
+        extractRulesData(repository, "/org/sonar/plugins/p3c/pmd/rules-p3c.xml", "/org/sonar/l10n/pmd/rules/p3c-pmd");
 
         repository.done();
+    }
+
+    private static void loadNames(NewRepository repository) {
+
+        Properties properties = new Properties();
+
+        try (InputStream stream = P3cPmdRulesDefinition.class.getResourceAsStream("/org/sonar/l10n/pmd.properties")) {
+            properties.load(stream);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Could not read names from properties", e);
+        }
+
+        for (NewRule rule : repository.rules()) {
+            String baseKey = "rule." + repository.key() + "." + rule.key();
+            String nameKey = baseKey + ".name";
+            String ruleName = properties.getProperty(nameKey);
+            if (ruleName != null) {
+                rule.setName(ruleName);
+            }
+            for (NewParam param : rule.params()) {
+                String paramDescriptionKey = baseKey + ".param." + param.key();
+                String paramDescription = properties.getProperty(paramDescriptionKey);
+                if (paramDescription != null) {
+                    param.setDescription(paramDescription);
+                }
+            }
+        }
     }
 }

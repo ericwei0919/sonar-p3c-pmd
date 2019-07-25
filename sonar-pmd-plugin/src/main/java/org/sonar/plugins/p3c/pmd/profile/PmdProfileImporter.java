@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.p3c.pmd.profile;
 
-import java.io.Reader;
-
 import org.sonar.api.profiles.ProfileImporter;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
@@ -34,6 +32,8 @@ import org.sonar.plugins.p3c.pmd.xml.PmdProperty;
 import org.sonar.plugins.p3c.pmd.xml.PmdRule;
 import org.sonar.plugins.p3c.pmd.xml.PmdRuleSet;
 import org.sonar.plugins.p3c.pmd.xml.PmdRuleSets;
+
+import java.io.Reader;
 
 public class PmdProfileImporter extends ProfileImporter {
 

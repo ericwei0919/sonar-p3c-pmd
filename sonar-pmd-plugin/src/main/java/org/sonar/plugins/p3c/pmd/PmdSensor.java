@@ -42,8 +42,7 @@ public class PmdSensor implements Sensor {
     }
 
     private boolean shouldExecuteOnProject() {
-        return (hasFilesToCheck(Type.MAIN, PmdConstants.REPOSITORY_KEY))
-                || (hasFilesToCheck(Type.TEST, PmdConstants.TEST_REPOSITORY_KEY));
+        return (hasFilesToCheck(Type.MAIN, PmdConstants.REPOSITORY_KEY));
     }
 
     private boolean hasFilesToCheck(Type type, String repositoryKey) {
