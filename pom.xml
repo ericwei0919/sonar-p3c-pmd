@@ -55,7 +55,7 @@
   </developers>
 
   <properties>
-    <pmd.version>6.13.0</pmd.version>
+    <pmd.version>6.15.0</pmd.version>
     <p3c-pmd.version>2.0.0</p3c-pmd.version>
     <junit.jupiter.version>5.4.2</junit.jupiter.version>
     <mockito.version>2.27.0</mockito.version>
@@ -112,10 +112,6 @@
           <exclusion>
             <groupId>net.java.dev.javacc</groupId>
             <artifactId>javacc</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
           </exclusion>
           <exclusion>
             <groupId>org.antlr</groupId>
